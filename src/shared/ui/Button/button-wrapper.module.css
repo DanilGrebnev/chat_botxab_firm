@@ -1,0 +1,25 @@
+.btn {
+    height: var(--btn-size);
+    width: var(--btn-size);
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--rounded-2);
+}
+
+.variant-outlined {
+    border: 1px solid var(--palette-4);
+}
+
+.background-variant-1 {
+    background: var(--palette-3);
+}
+
+.background-variant-2 {
+    background: var(--palette-3);
+    box-shadow: rgba(255, 255, 255, 0.4);
+}
+
+.background-variant-transparent {
+}

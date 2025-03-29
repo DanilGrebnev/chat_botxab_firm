@@ -1,0 +1,20 @@
+.text {
+    color: white;
+    line-height: 22px;
+}
+
+.font-weight-normal {
+    font-weight: var(--font-weight-normal);
+}
+
+.font-weight-bold {
+    font-weight: var(--font-weight-bold);
+}
+
+.color-main {
+    color: var(--font-color-main);
+}
+
+.color-secondary {
+    color: var(--font-color-secondary);
+}

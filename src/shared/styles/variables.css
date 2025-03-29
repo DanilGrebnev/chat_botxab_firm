@@ -1,0 +1,36 @@
+:root {
+    --palette-1: rgba(14, 12, 21, 1);
+    --palette-2: rgba(18, 24, 37, 1);
+    --palette-2-opacity: rgba(18, 24, 37, 0.75);
+    --palette-3: rgba(28, 100, 242, 1);
+    --palette-4: rgba(49, 62, 98, 1);
+    --palette-6: rgba(254, 66, 66, 1);
+    --palette-7: rgba(255, 255, 255, 1);
+
+    --font-100:12px
+    --font-120: 14px;
+    --font-130: 15px;
+    --font-140: 16px;
+    --font-160: 18px;
+
+    --font-weight-bold: 500;
+    --font-weight-normal:400;
+
+    --font-color-main: rgba(255, 255, 255, 1);
+    --font-color-secondary:rgba(156, 163, 175, 1); 
+
+    --dark-theme-1: var(--palette-1);
+    --dark-theme-2: var(--palette-2);
+    --dark-theme-2-opacity: var(--palette-2-opacity);
+
+    --global-gap-1: 16px;
+    --global-gap-2: 12px;
+    --global-gap-3: 6px;
+
+    --border-palette-1: var(--palette-4);
+    --rounded-1: 18px;
+    --rounded-2: 8px;
+
+
+    --btn-size: 38px;
+}

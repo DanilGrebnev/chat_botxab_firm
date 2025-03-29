@@ -2,5 +2,7 @@
     "tabWidth": 4,
     "semi": false,
     "arrowParens": "always",
-    "printWidth": 8
+    "printWidth": 80,
+    "jsxSingleQuote": true,
+    "singleAttributePerLine": true
 }

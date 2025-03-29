@@ -1,0 +1,30 @@
+.box {
+    padding: var(--global-gap);
+    border-radius: var(--rounded-2);
+}
+
+.border {
+    border: 1px solid var(--border-palette-1);
+}
+
+/* Padding */
+.padding-big {
+    padding: var(--global-gap-1);
+}
+
+.padding-normal {
+    padding: var(--global-gap-2);
+}
+
+.padding-small {
+    padding: var(--global-gap-3);
+}
+
+/* Background */
+.background-standart {
+    background: var(--dark-theme-2);
+}
+
+.background-opacity {
+    background: var(--dark-theme-2-opacity);
+}

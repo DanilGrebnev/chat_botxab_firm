@@ -1,0 +1,50 @@
+.select {
+    position: relative;
+    width: fit-content;
+}
+
+.label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+.select_list {
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    padding: 8px;
+    background: var(--palette-2-opacity);
+    border: 1px solid var(--palette-4);
+    border-radius: var(--rounded-2);
+    backdrop-filter: blur(16px);
+}
+
+.drop_down_direction-top .select_list {
+    margin-bottom: 8px;
+    bottom: 100%;
+}
+
+.drop_down_direction-bottom .select_list {
+    margin-top: 8px;
+}
+
+.icon {
+    transition: 0.2s;
+}
+
+/* Поворачиваем иконку в зависимости от направления открывания select */
+.drop_down_direction-top .icon.icon_active {
+    transform: rotate(180deg);
+}
+
+.drop_down_direction-bottom .icon {
+    transform: rotate(180deg);
+}
+
+.drop_down_direction-bottom .icon.icon_active {
+    transform: rotate(360deg);
+}

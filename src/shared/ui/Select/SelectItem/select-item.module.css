@@ -1,0 +1,15 @@
+.select_item {
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: var(--rounded-2);
+    transition: 0.3s;
+    color: white;
+}
+
+.select_item:hover {
+    background: var(--palette-4);
+}
+
+.select_item.active {
+    background: var(--palette-4);
+}

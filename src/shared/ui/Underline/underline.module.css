@@ -1,0 +1,4 @@
+.underline {
+    height: 1px;
+    background: var(--palette-4);
+}

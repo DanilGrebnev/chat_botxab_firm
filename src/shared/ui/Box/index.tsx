@@ -1,0 +1,40 @@
+import cn from "@/shared/lib/cn"
+import { ComponentPropsWithRef } from "react"
+import s from "./box.module.css"
+
+export interface TBox extends ComponentPropsWithRef<"div"> {
+    /**
+     * @description
+     * big: 16px;
+     * normal: 12px;
+     * small: 6px;
+     */
+    padding?: "big" | "normal" | "small"
+    border?: boolean
+    background?: "standart" | "opacity"
+    
+}
+
+export const Box = (props: TBox) => {
+    const {
+        className,
+        border = false,
+        background = "standart",
+        padding = "normal",
+        children,
+    } = props
+
+    return (
+        <div
+            className={cn(
+                s.box,
+                s[`padding-${padding}`],
+                s[`background-${background}`],
+                { [s.border]: border },
+                className
+            )}
+        >
+            {children}
+        </div>
+    )
+}
