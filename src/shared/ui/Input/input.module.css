@@ -1,9 +1,7 @@
 .input_wrapper {
     width: 100%;
-    /* height: 66px; */
     display: flex;
     align-items: center;
-    /* padding-left: 20px; */
 }
 
 .size-s {

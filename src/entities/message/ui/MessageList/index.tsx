@@ -12,6 +12,14 @@ interface MessageListProps {
     className?: string
 }
 
+type SSE_EVENTS =
+    | "MESSAGE_UPDATE"
+    | "UPDATE"
+    | "JOB_UPDATE"
+    | "JOB_DONE"
+    | "HOB_CREATE"
+    | "TRANSACTION_CREATE"
+
 export const MessageList = (props: MessageListProps) => {
     const { className } = props
 
@@ -31,7 +39,7 @@ export const MessageList = (props: MessageListProps) => {
                 onmessage(message) {
                     // setMessages(message)
                     console.log("sse message")
-                    console.log(message.data)
+                    console.log(JSON.parse(message.data))
                 },
             }
         )

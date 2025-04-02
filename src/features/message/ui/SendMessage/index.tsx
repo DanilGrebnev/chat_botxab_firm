@@ -24,6 +24,7 @@ export const SendMessage = () => {
             value={message}
             button={
                 <Button
+                    background='variant-2'
                     onClick={() => {
                         mutate(
                             { chatId, message },
@@ -34,7 +35,6 @@ export const SendMessage = () => {
                             }
                         )
                     }}
-                    background='variant-2'
                 >
                     <SendIcon />
                 </Button>
