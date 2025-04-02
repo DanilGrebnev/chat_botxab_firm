@@ -20,6 +20,7 @@ export const SendMessage = () => {
         <Input
             placeholder='Спроси о чем-нибудь...'
             onChange={onChange}
+            sizes='l'
             value={message}
             button={
                 <Button

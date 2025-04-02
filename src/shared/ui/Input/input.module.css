@@ -9,7 +9,12 @@
 .size-s {
     height: 44px;
 }
+
 .size-m {
+    height: 54px;
+}
+
+.size-l {
     height: 66px;
 }
 

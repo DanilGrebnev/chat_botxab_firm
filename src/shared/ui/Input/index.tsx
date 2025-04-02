@@ -8,7 +8,7 @@ import { ComponentPropsWithRef, memo, type ReactNode } from "react"
 interface InputProps extends ComponentPropsWithRef<"input"> {
     className?: string
     button?: ReactNode
-    sizes?: "s" | "m"
+    sizes?: "s" | "m" | "l"
 }
 
 export const Input = memo((props: InputProps) => {
