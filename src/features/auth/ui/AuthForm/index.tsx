@@ -1,3 +1,5 @@
+"use client"
+
 import { Box } from "@/shared/ui/Box"
 import { Input } from "@/shared/ui/Input"
 import CloseIcon from "@/shared/assets/close.svg"
@@ -5,8 +7,27 @@ import CloseIcon from "@/shared/assets/close.svg"
 import s from "./s.module.css"
 import { Text } from "@/shared/ui/Text"
 import { Button } from "@/shared/ui/Button"
+import { saveUserLogin } from "@/shared/api/user/loginApi"
+
+type FormDTO = {
+    email: string
+    password: string
+}
 
 export const AuthForm = () => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        const formData = new FormData(e.currentTarget)
+        const data: Partial<FormDTO> = {}
+        formData.forEach(
+            (value, key) => (data[key as keyof FormDTO] = value as string)
+        )
+
+        saveUserLogin(data as Required<FormDTO>)
+        
+    }
+
     return (
         <Box
             padding='xl'
@@ -15,14 +36,17 @@ export const AuthForm = () => {
             rounded='3'
             background='secondary'
         >
-            <div className={s.body_form}>
+            <form
+                onSubmit={onSubmit}
+                className={s.body_form}
+            >
                 <div className={s.title}>
                     <Text fontSize='200'>Авторизация</Text>
                     <CloseIcon className={s.close_icon} />
                 </div>
 
                 <label
-                    htmlFor='email_auth'
+                    htmlFor='email'
                     className={s.input_field}
                 >
                     <Text
@@ -37,12 +61,13 @@ export const AuthForm = () => {
                         placeholder='Ваш E-Mail'
                         type='email'
                         sizes='m'
-                        name='email_auth'
-                        id='email_auth'
+                        name='email'
+                        id='email'
+                        required
                     />
                 </label>
                 <label
-                    htmlFor='password_auth'
+                    htmlFor='password'
                     className={s.input_field}
                 >
                     <Text
@@ -57,11 +82,13 @@ export const AuthForm = () => {
                         placeholder='Ваш пароль'
                         type='password'
                         sizes='m'
-                        name='password_auth'
-                        id='password_auth'
+                        name='password'
+                        id='password'
+                        required
                     />
                 </label>
                 <Button
+                    type='submit'
                     size='m'
                     background='variant-2'
                     fullWidth
@@ -69,7 +96,7 @@ export const AuthForm = () => {
                 >
                     <Text fontSize='160'>Войти</Text>
                 </Button>
-            </div>
+            </form>
         </Box>
     )
 }
