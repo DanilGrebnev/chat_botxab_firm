@@ -1,6 +1,6 @@
-type TCNArgs = string | { [key: string]: boolean | undefined } | undefined
+type Args = string | { [key: string]: boolean | undefined } | undefined
 
-export const cn = (...args: TCNArgs[]) => {
+export const cn = (...args: Args[]) => {
     if (!args.length) return ""
 
     return args

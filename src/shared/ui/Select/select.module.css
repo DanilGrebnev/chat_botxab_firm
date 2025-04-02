@@ -19,8 +19,9 @@
     padding: 8px;
     background: var(--palette-2-opacity);
     border: 1px solid var(--palette-4);
-    border-radius: var(--rounded-2);
+    border-radius: var(--rounded-1);
     backdrop-filter: blur(16px);
+    z-index: 5;
 }
 
 .drop_down_direction-top .select_list {

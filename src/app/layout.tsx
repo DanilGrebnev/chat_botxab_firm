@@ -21,9 +21,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang='en'>
-            <MainProvider>
-                <body className={IBMFont.className}>{children}</body>
-            </MainProvider>
+            <body className={IBMFont.className}>
+                <MainProvider>{children}</MainProvider>
+            </body>
         </html>
     )
 }

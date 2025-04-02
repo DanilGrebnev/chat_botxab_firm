@@ -1,6 +1,13 @@
 .box {
-    padding: var(--global-gap);
-    border-radius: var(--rounded-2);
+    padding: var(--global-gap-1);
+}
+
+.rounded-1 {
+    border-radius: var(--rounded-1);
+}
+
+.rounded-2 {
+    border-radius: var(--rounded-3);
 }
 
 .border {

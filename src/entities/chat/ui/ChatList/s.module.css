@@ -1,0 +1,24 @@
+.list {
+    overflow: auto;
+    padding: 10px 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    overflow: auto;
+    height: 100%;
+}
+
+.wrapper > div {
+    padding: 8px;
+}
+
+.wrapper > div:first-child {
+    padding-top: 0px;
+}
+
+.wrapper > div:last-child {
+    padding-bottom: 0px;
+}

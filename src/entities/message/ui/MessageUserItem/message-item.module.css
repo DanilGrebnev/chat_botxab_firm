@@ -1,0 +1,28 @@
+.message {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: auto 1fr auto;
+    width: fit-content;
+    justify-self: end;
+}
+
+.content {
+    display: flex;
+    background: var(--palette-10);
+    border-radius: 10px 10px 0 10px;
+}
+
+.text {
+    margin: 7px 8px;
+    padding: 7px 8px;
+}
+
+.time {
+    margin-right: 8px;
+    margin-bottom: 7px;
+    align-self: flex-end;
+}
+
+.copy_icon {
+    align-self: end;
+}

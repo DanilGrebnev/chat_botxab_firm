@@ -1,7 +1,16 @@
 .chat {
     display: grid;
-    align-items: center;
     grid-template-columns: auto 1fr auto;
-    column-gap: 8px;
-    padding: 8px;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.chat:hover {
+    opacity: 1;
+}
+
+.disabled {
+    opacity: var(--disabled-opacity);
 }

@@ -12,7 +12,7 @@ export interface TBox extends ComponentPropsWithRef<"div"> {
     padding?: "big" | "normal" | "small"
     border?: boolean
     background?: "standart" | "opacity"
-    
+    rounded?: "1" | "2"
 }
 
 export const Box = (props: TBox) => {
@@ -21,6 +21,7 @@ export const Box = (props: TBox) => {
         border = false,
         background = "standart",
         padding = "normal",
+        rounded = "1",
         children,
     } = props
 
@@ -30,6 +31,7 @@ export const Box = (props: TBox) => {
                 s.box,
                 s[`padding-${padding}`],
                 s[`background-${background}`],
+                s[`rounded-${rounded}`],
                 { [s.border]: border },
                 className
             )}

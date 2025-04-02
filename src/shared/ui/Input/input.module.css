@@ -1,0 +1,24 @@
+.input_wrapper {
+    width: 100%;
+    /* height: 66px; */
+    display: flex;
+    align-items: center;
+    /* padding-left: 20px; */
+}
+
+.size-s {
+    height: 44px;
+}
+.size-m {
+    height: 66px;
+}
+
+.input_wrapper::placeholder {
+    color: var(--palette-8);
+    font-size: var(--font-120);
+}
+
+.input {
+    flex-grow: 1;
+    color: var(--font-color-main);
+}

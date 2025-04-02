@@ -1,7 +1,7 @@
 .select_item {
     padding: 10px 15px;
     cursor: pointer;
-    border-radius: var(--rounded-2);
+    border-radius: var(--rounded-1);
     transition: 0.3s;
     color: white;
 }

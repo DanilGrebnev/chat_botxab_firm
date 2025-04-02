@@ -8,7 +8,9 @@ type TText<T extends TAppliedTags> = {
     fontSize?: TFontSize
     fontWeight?: TFontWeight
     color?: TColor
-} & ComponentPropsWithRef<T>
+} & Omit<ComponentPropsWithRef<T>, "children"> & {
+        children?: string
+    }
 
 export const Text = <T extends TAppliedTags = "p">(props: TText<T>) => {
     const {

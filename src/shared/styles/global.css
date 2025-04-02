@@ -1,3 +1,27 @@
 body {
     background: var(--palette-1);
 }
+
+*::-webkit-scrollbar {
+    width: 5px; /* ширина всей полосы прокрутки */
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--palette-4); /* цвет бегунка */
+    border-radius: 5px;
+}
+
+.truncate {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.disabled {
+    opacity: 0.4;
+    pointer-events: none;
+}

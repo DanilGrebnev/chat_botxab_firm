@@ -6,6 +6,9 @@
     --palette-4: rgba(49, 62, 98, 1);
     --palette-6: rgba(254, 66, 66, 1);
     --palette-7: rgba(255, 255, 255, 1);
+    --palette-8:rgba(97, 109, 141, 1);
+    --palette-9: rgba(34, 43, 68, 1);
+    --palette-10:rgba(71, 133, 255, 0.5);
 
     --font-100:12px
     --font-120: 14px;
@@ -28,9 +31,15 @@
     --global-gap-3: 6px;
 
     --border-palette-1: var(--palette-4);
-    --rounded-1: 18px;
-    --rounded-2: 8px;
 
+    --rounded-1: 8px;
+    --rounded-2: 14px;
+    --rounded-3: 18px;
 
-    --btn-size: 38px;
+    --btn-size-s: 38px;
+    --btn-size-m:52px;
+
+    --disabled-opacity: 0.4;
 }
+
+

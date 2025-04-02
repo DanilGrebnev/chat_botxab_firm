@@ -1,10 +1,10 @@
 import { ReactNode } from "react"
 
-export type TData = { [key: string]: any } & {
+export type TData = (Record<string, any> & {
     value: string
     id: string
     active: boolean
-}[]
+})[]
 
 export interface SelectProps<T extends TData> {
     label?: ReactNode
@@ -17,7 +17,7 @@ export interface SelectProps<T extends TData> {
      * </Select>
      */
     children?: (value: T[number], i?: number) => ReactNode
-    onChange: (updatedArray: TData) => void
+    onChange: (updatedArray: T) => void
     name?: string
     dropDownDireaction?: "top" | "bottom"
 }

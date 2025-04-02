@@ -14,6 +14,9 @@
 
 .sidebar {
     width: 324px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
 }
 
 .btn_group {
@@ -22,5 +25,20 @@
     margin: 20px 0 16px 0;
 }
 
-.chat_items_list {
+.chat_list {
+    flex-grow: 1;
+}
+
+.message_list {
+    flex-grow: 1;
+}
+
+.chat_bar_container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.write_chat_name {
+    margin-bottom: 16px;
 }

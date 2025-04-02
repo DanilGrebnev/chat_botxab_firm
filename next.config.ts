@@ -1,16 +1,16 @@
 import type { NextConfig } from "next"
-// import { svgrWebpackConfig } from "./svgrWebpackConfig"
+import { svgrWebpackConfig } from "./webpackConfig/svgrWebpackConfig"
 
 const nextConfig: NextConfig = {
-    experimental: {
-        turbo: {
-            rules: {
-                "*.svg": {
-                    loaders: ["@svgr/webpack"],
-                    as: "*.js",
-                },
-            },
-        },
+    eslint: {
+        // ignoreDuringBuilds: true,
+    },
+    typescript: {
+        // ignoreBuildErrors: true,
+    },
+    reactStrictMode: false,
+    webpack(config) {
+        return svgrWebpackConfig(config)
     },
 
     /* config options here */

@@ -42,7 +42,7 @@ export const Select = <T extends TData>(props: SelectProps<T>) => {
                     active: d.id === item.id,
                 }))
 
-                onChange(updatedArray)
+                onChange(updatedArray as any)
             }
 
             if (!children) {

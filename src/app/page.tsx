@@ -1,5 +1,1 @@
-import { HomePage } from "@/views/home"
-
-export default function Home() {
-    return <HomePage />
-}
+export { HomePage as default } from "@/views/home"

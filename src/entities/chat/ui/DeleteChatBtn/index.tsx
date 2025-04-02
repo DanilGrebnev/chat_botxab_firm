@@ -1,16 +1,22 @@
 import DeleteIcon from "@/shared/assets/delete-icon.svg"
 import s from "./chat-btn.module.css"
 import cn from "@/shared/lib/cn"
+import { MouseEvent } from "react"
 
 interface DeleteChatBtnProps {
     className?: string
+    onClick?: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
 export const DeleteChatBtn = (props: DeleteChatBtnProps) => {
-    const { className } = props
+    const { onClick, className } = props
 
     return (
-        <button className={cn(s.btn, className)}>
+        <button
+            type='button'
+            onClick={onClick}
+            className={cn(s.btn, className)}
+        >
             <DeleteIcon />
         </button>
     )

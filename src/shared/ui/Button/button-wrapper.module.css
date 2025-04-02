@@ -1,11 +1,10 @@
 .btn {
-    height: var(--btn-size);
-    width: var(--btn-size);
     padding: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: var(--rounded-2);
+    border-radius: var(--rounded-1);
+    cursor: pointer;
 }
 
 .variant-outlined {
@@ -18,8 +17,19 @@
 
 .background-variant-2 {
     background: var(--palette-3);
-    box-shadow: rgba(255, 255, 255, 0.4);
+    box-shadow: inset 0px 1.5px 1px 0px rgba(255, 255, 255, 0.4);
 }
 
-.background-variant-transparent {
+.size-s {
+    height: var(--btn-size-s);
+    width: var(--btn-size-s);
+}
+
+.size-m {
+    height: var(--btn-size-m);
+    width: var(--btn-size-m);
+}
+
+.full_width {
+    width: 100%;
 }
