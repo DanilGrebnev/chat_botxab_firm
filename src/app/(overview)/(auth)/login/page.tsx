@@ -1,5 +1,1 @@
-import { Text } from "@/shared/ui/Text"
-
-export default function LoginPage() {
-    return <Text>Login</Text>
-}
+export { LoginPage as default } from "@/views/auth"

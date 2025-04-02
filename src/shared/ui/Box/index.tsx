@@ -9,10 +9,10 @@ export interface TBox extends ComponentPropsWithRef<"div"> {
      * normal: 12px;
      * small: 6px;
      */
-    padding?: "big" | "normal" | "small"
+    padding?: "xl" | "big" | "normal" | "small"
     border?: boolean
-    background?: "standart" | "opacity"
-    rounded?: "1" | "2"
+    background?: "standart" | 'secondary' | "opacity"
+    rounded?: "1" | "2" | "3"
 }
 
 export const Box = (props: TBox) => {

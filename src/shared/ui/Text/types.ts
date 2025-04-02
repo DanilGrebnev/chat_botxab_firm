@@ -10,7 +10,7 @@ export type TAppliedTags =
     | "span"
     | "li"
 
-export type TFontSize = "100" | "120" | "130" | "140" | "160"
+export type TFontSize = "100" | "120" | "130" | "140" | "160" | "200"
 
 export type TFontWeight = "normal" | "bold"
 

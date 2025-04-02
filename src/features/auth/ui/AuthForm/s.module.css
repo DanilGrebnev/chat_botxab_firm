@@ -1,0 +1,28 @@
+.input_field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 459px;
+}
+.title {
+    display: flex;
+}
+.close_icon {
+    width: 24px;
+    height: 24px;
+    margin-left: auto;
+}
+.body_form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input input::placeholder {
+    color: var(--palette-8);
+}

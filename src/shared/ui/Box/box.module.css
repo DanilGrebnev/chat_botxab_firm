@@ -9,6 +9,9 @@
 .rounded-2 {
     border-radius: var(--rounded-3);
 }
+.rounded-3 {
+    border-radius: var(--rounded-4);
+}
 
 .border {
     border: 1px solid var(--border-palette-1);
@@ -26,10 +29,17 @@
 .padding-small {
     padding: var(--global-gap-3);
 }
+.padding-xl {
+    padding: var(--global-gap-4);
+}
 
 /* Background */
 .background-standart {
     background: var(--dark-theme-2);
+}
+
+.background-secondary {
+    background: var(--palette-9);
 }
 
 .background-opacity {
