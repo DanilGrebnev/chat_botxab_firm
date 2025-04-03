@@ -5,13 +5,14 @@ import { Text } from "@/shared/ui/Text"
 import CopyIcon from "@/shared/assets/copy-icon.svg"
 import { TBaseMessage } from "../../model/type"
 import { getTime } from "@/shared/lib/getTime"
+import { memo } from "react"
 
 interface MessageAlItemProps extends TBaseMessage {
     className?: string
     label: string
 }
 
-export const MessageAlItem = (props: MessageAlItemProps) => {
+export const MessageAlItem = memo((props: MessageAlItemProps) => {
     const { className, label, created_at, content } = props
 
     return (
@@ -40,4 +41,6 @@ export const MessageAlItem = (props: MessageAlItemProps) => {
             </section>
         </div>
     )
-}
+})
+
+MessageAlItem.displayName = "MessageAlItem"

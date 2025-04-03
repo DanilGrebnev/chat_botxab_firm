@@ -2,64 +2,64 @@
 
 import cn from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/Container"
-import { useOpenedChatSlice } from "@/shared/store/chat"
 import { MessageRender } from "../MessageRender"
 import { fetchEventSource } from "@microsoft/fetch-event-source"
 import { consts } from "@/shared/consts"
-import { useEffect, useState } from "react"
+import { useDeferredValue, useEffect, useState } from "react"
+import { TAssistantMessage, TUserMessage } from "@/shared/types/message/message"
+import { useGetAllMessageList } from "@/shared/api/message/messageApiHooks"
+import { useOpenedChatSlice } from "@/shared/store/chat"
+import { useQueryClient, QueryClient } from "@tanstack/react-query"
+import { messageKeys } from "@/shared/api/message/messageKey"
+import { useGetAllMessageStream } from "../../../../shared/api/message/messageApiHooks"
 
 interface MessageListProps {
     className?: string
+    chatId: string
 }
 
 type SSE_EVENTS =
     | "MESSAGE_UPDATE"
+    | "MESSAGE_CREATE"
     | "UPDATE"
     | "JOB_UPDATE"
     | "JOB_DONE"
-    | "HOB_CREATE"
     | "TRANSACTION_CREATE"
 
+interface TSmallMessage {
+    content: string
+    id: string
+}
+
+interface TMessageEventData {
+    name: SSE_EVENTS
+    data: { message: TAssistantMessage | TUserMessage | TSmallMessage }
+}
+
+type TMessageStore = (TUserMessage | TAssistantMessage)[]
+
 export const MessageList = (props: MessageListProps) => {
-    const { className } = props
+    const { className, chatId } = props
 
-    const chatId = useOpenedChatSlice.use.openedChatId()
-    const [messages, setMessages] = useState([])
+    // Если раскомментировать, то будет ошибка с вечным перерендером от virtuoso.
+    // const chatId = useOpenedChatSlice.use.openedChatId()
 
+    const { data, isPending } = useGetAllMessageList(chatId)
+
+    const [messages, setMessages] = useGetAllMessageStream(chatId)
+
+    // Инициализируем историю сообщений в store
     useEffect(() => {
-        if (!chatId) return
-        const eventSource = fetchEventSource(
-            consts.BASE_FETCH_URL + `/chat/${chatId}/stream`,
-            {
-                method: "GET",
-                headers: {
-                    [consts.API_AUTH_HEADER as string]:
-                        consts.AUTH_API_TOKEN as string,
-                },
-                onmessage(message) {
-                    // setMessages(message)
-                    console.log("sse message")
-                    console.log(JSON.parse(message.data))
-                },
-            }
-        )
-    }, [chatId])
-
-    useEffect(() => {
-        console.log(messages)
-    }, [messages])
+        if (isPending || !data?.length) return
+        setMessages(data)
+    }, [data, isPending, setMessages])
 
     return (
         <Container
             size='m'
             className={cn(className)}
         >
-            {messages?.length && (
-                <MessageRender
-                    data={messages}
-                    // endReached={fetchNextPage}
-                />
-            )}
+            {!!messages?.length && <MessageRender data={messages} />}
         </Container>
     )
 }

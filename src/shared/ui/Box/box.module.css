@@ -9,6 +9,7 @@
 .rounded-2 {
     border-radius: var(--rounded-3);
 }
+
 .rounded-3 {
     border-radius: var(--rounded-4);
 }

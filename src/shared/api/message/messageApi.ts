@@ -1,5 +1,6 @@
 import {
     TCreateMessageDTO,
+    TGetAllMessageListResponse,
     TGetMessageListResponse,
 } from "@/shared/types/message/message"
 import { api } from "../api"
@@ -13,6 +14,12 @@ class MessageApi {
                 searchParams,
             })
             .json<TGetMessageListResponse>()
+    }
+
+    getAllMessageList = (searchParams: { chatId: string }) => {
+        return api
+            .get(this.baseUrl + "list-all", { searchParams })
+            .json<TGetAllMessageListResponse>()
     }
 
     sendMessage = (message: TCreateMessageDTO) => {

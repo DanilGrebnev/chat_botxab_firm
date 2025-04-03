@@ -6,8 +6,8 @@ import s from "./chatItem.module.css"
 import { Text } from "@/shared/ui/Text"
 import { DeleteChatBtn } from "../DeleteChatBtn"
 import cn from "@/shared/lib/cn"
-import { useOpenedChatSlice } from "@/shared/store/chat"
 import { useDeleteChatMutation } from "@/shared/api/chat/chatApiHooks"
+import { useRouter } from "next/navigation"
 
 interface ChatItemProps {
     disabled?: boolean
@@ -20,11 +20,10 @@ export const ChatItem = memo((props: ChatItemProps) => {
     const { disabled, id, name, className } = props
 
     const { mutate } = useDeleteChatMutation()
-
-    const setChatId = useOpenedChatSlice.use.setChatId()
+    const router = useRouter()
 
     const onClick = () => {
-        setChatId(id)
+        router.push(`/${id}`)
     }
 
     const deleteChat = useCallback(() => {

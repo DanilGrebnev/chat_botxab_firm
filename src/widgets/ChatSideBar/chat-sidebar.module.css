@@ -1,0 +1,21 @@
+.sidebar {
+    max-width: 324px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.chat_list {
+    flex-grow: 1;
+}
+
+.btn_group {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0 16px 0;
+}
+
+.write_chat_name {
+    margin-bottom: 16px;
+}

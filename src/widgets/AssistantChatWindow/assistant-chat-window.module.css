@@ -1,0 +1,17 @@
+.chat_bar {
+    width: 100%;
+}
+
+.message_list {
+    flex-grow: 1;
+}
+
+.chat_bar_container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.write_chat_name {
+    margin-bottom: 16px;
+}

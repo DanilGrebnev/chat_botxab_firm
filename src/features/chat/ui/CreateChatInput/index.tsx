@@ -6,7 +6,7 @@ import SendIcon from "@/shared/assets/send-icon.svg"
 import { AnimateShowWrapper } from "@/shared/ui/AnimateShowWrapper"
 import { Button } from "@/shared/ui/Button"
 import { useCreateChatMutation } from "@/shared/api/chat/chatApiHooks"
-import { useState } from "react"
+import { FormEvent, useState } from "react"
 import { useOutsideClick } from "@/shared/hooks/useOutsideClick"
 import toast from "react-hot-toast"
 import cn from "@/shared/lib/cn"
@@ -22,7 +22,7 @@ export const CreateChatInput = (props: WriteChatNameInputProps) => {
     const setOpenChat = useOpenChatSlice.use.setOpenChat()
     const [name, setName] = useState("")
 
-    const nameSchema = z.string().min(3)
+    const nameSchema = z.string().min(1)
 
     const { nodeRef } = useOutsideClick({
         handler: () => setOpenChat(false),
@@ -31,9 +31,14 @@ export const CreateChatInput = (props: WriteChatNameInputProps) => {
 
     const { mutateAsync, isPending } = useCreateChatMutation()
 
-    const onSubmit = async () => {
-        await nameSchema.parseAsync(name)
+    const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
 
+        const parseResult = nameSchema.safeParse(name)
+        if (!parseResult.success) {
+            toast.error("Название чата не может быть пустым")
+            return
+        }
         await toast.promise(() => mutateAsync({ name }), {
             loading: "Создание чата",
             success: () => {
@@ -51,20 +56,22 @@ export const CreateChatInput = (props: WriteChatNameInputProps) => {
             className={className}
             show={isOpenChat}
         >
-            <Input
-                sizes='s'
-                value={name}
-                placeholder='Введите название чата'
-                onChange={(e) => setName(e.target.value)}
-                button={
-                    <Button
-                        className={cn({ ["disabled"]: isPending })}
-                        onClick={onSubmit}
-                    >
-                        <SendIcon />
-                    </Button>
-                }
-            />
+            <form onSubmit={onSubmit}>
+                <Input
+                    sizes='s'
+                    value={name}
+                    placeholder='Введите название чата'
+                    onChange={(e) => setName(e.target.value)}
+                    button={
+                        <Button
+                            type='submit'
+                            className={cn({ ["disabled"]: isPending })}
+                        >
+                            <SendIcon />
+                        </Button>
+                    }
+                />
+            </form>
         </AnimateShowWrapper>
     )
 }

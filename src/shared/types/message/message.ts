@@ -2,33 +2,13 @@ export interface TMessageBase {
     id: string
     type: string
     status: string
-    tokens: 0
     action_type: string
     user_id: string
     chat_id: string
-    additional_content: string
-    tg_bot_message_id: string
-    disabled: true
+    disabled: boolean
     content: string
     model: null | TAssistantModel
-    request_id: string
-    transaction_id: string
-    model_id: string
     created_at: string
-    transaction: {
-        id: string
-        provider: string
-        currency: string
-        meta: Record<string, any>
-        amount: 0
-        status: string
-        type: string
-        plan_id: string
-        user_id: string
-        referral_id: string
-        external_id: string
-        created_at: string
-    }
 }
 
 interface TAssistantModel {
@@ -70,12 +50,12 @@ interface TAssistantModel {
     used_count: number
 }
 
-interface TAssistantMessage extends TMessageBase {
+export interface TAssistantMessage extends TMessageBase {
     model: TAssistantModel
     role: "assistant"
 }
 
-interface TUserMessage extends TMessageBase {
+export interface TUserMessage extends TMessageBase {
     role: "user"
     model: null
 }
@@ -84,6 +64,8 @@ export interface TGetMessageListResponse {
     data: (TUserMessage | TAssistantMessage)[]
     page: number
 }
+
+export type TGetAllMessageListResponse = (TUserMessage | TAssistantMessage)[]
 
 export interface TCreateMessageDTO {
     chatId: string

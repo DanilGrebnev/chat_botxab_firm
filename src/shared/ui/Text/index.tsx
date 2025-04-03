@@ -1,4 +1,4 @@
-import { ComponentPropsWithRef } from "react"
+import { ComponentPropsWithRef, memo } from "react"
 import { TAppliedTags, TColor, TFontSize, TFontWeight } from "./types"
 import cn from "@/shared/lib/cn"
 import s from "./text.module.css"
@@ -12,7 +12,7 @@ type TText<T extends TAppliedTags> = {
         children?: string
     }
 
-export const Text = <T extends TAppliedTags = "p">(props: TText<T>) => {
+export const Text = memo(<T extends TAppliedTags = "p">(props: TText<T>) => {
     const {
         tag = "p",
         fontSize = "130",
@@ -40,4 +40,6 @@ export const Text = <T extends TAppliedTags = "p">(props: TText<T>) => {
             {children}
         </Tag>
     )
-}
+})
+
+Text.displayName = "Text"

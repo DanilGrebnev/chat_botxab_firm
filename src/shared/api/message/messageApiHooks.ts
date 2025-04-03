@@ -2,9 +2,15 @@ import { messageApi } from "./messageApi"
 import {
     useInfiniteQuery,
     useMutation,
+    useQuery,
     useQueryClient,
 } from "@tanstack/react-query"
 import { messageKeys } from "./messageKey"
+import { chatApi } from "../chat/chatApi"
+import { Dispatch, SetStateAction, useEffect, useState } from "react"
+import { fetchEventSource } from "@microsoft/fetch-event-source"
+import { consts } from "@/shared/consts"
+import { TAssistantMessage, TUserMessage } from "@/shared/types/message/message"
 
 export const useGetMessageListQuery = (chatId: string) => {
     return useInfiniteQuery({
@@ -29,15 +35,92 @@ export const useGetMessageListQuery = (chatId: string) => {
     })
 }
 
-export const useSendMessageMutation = () => {
-    // const client = useQueryClient()
+export const useGetAllMessageList = (chatId: string) => {
+    return useQuery({
+        queryFn: () => messageApi.getAllMessageList({ chatId }),
+        select: (data) => data.reverse(),
+        queryKey: [messageKeys.getAllMessageList(chatId)],
+        enabled: !!chatId,
+    })
+}
 
+export const useSendMessageMutation = () => {
     return useMutation({
         mutationFn: messageApi.sendMessage,
-        // onSuccess: async (_, { chatId }) => {
-        //     await client.invalidateQueries({
-        //         queryKey: [messageKeys.getMessageList(chatId)],
-        //     })
-        // },
     })
+}
+
+export const useGetAllMessageStream = (chatId: string) => {
+    interface TSmallMessage {
+        content: string
+        id: string
+    }
+    type SSE_EVENTS =
+        | "MESSAGE_UPDATE"
+        | "MESSAGE_CREATE"
+        | "UPDATE"
+        | "JOB_UPDATE"
+        | "JOB_DONE"
+        | "TRANSACTION_CREATE"
+
+    interface TMessageEventData {
+        name: SSE_EVENTS
+        data: { message: TAssistantMessage | TUserMessage | TSmallMessage }
+    }
+
+    type TMessageStore = (TUserMessage | TAssistantMessage)[]
+
+    const [messages, setMessages] = useState<TMessageStore>([])
+
+    useEffect(() => {
+        if (!chatId) return
+        const controller = new AbortController()
+
+        fetchEventSource(consts.BASE_FETCH_URL + `/chat/${chatId}/stream`, {
+            method: "GET",
+            headers: {
+                [consts.API_AUTH_HEADER as string]:
+                    consts.AUTH_API_TOKEN as string,
+            },
+
+            onmessage(messageEvent) {
+                const eventData = JSON.parse(
+                    messageEvent.data
+                ) as TMessageEventData
+
+                const m = eventData?.data?.message
+
+                if (eventData.name === "MESSAGE_CREATE") {
+                    setMessages((p) => [
+                        ...p,
+                        { ...m, content: "Печатает..." } as
+                            | TAssistantMessage
+                            | TUserMessage,
+                    ])
+                }
+
+                if (eventData.name === "MESSAGE_UPDATE") {
+                    setMessages((p) =>
+                        p.map((message) => {
+                            if (m.content) {
+                                if (message.id === m.id) {
+                                    message.content = m.content
+                                }
+                            }
+
+                            return message
+                        })
+                    )
+                }
+            },
+            signal: controller.signal,
+        })
+
+        return () => controller.abort()
+    }, [chatId])
+
+    return [messages, setMessages] as [
+        TMessageStore,
+        Dispatch<SetStateAction<TMessageStore>>
+    ]
 }

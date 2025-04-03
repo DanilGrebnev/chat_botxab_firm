@@ -1,0 +1,6 @@
+.page {
+    height: 100vh;
+    display: flex;
+    gap: var(--global-gap-1);
+    padding: var(--global-gap-1);
+}
