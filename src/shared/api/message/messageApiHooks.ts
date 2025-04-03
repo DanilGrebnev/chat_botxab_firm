@@ -1,10 +1,5 @@
 import { messageApi } from "./messageApi"
-import {
-    useInfiniteQuery,
-    useMutation,
-    useQuery,
-    useQueryClient,
-} from "@tanstack/react-query"
+import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
 import { messageKeys } from "./messageKey"
 import { chatApi } from "../chat/chatApi"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"

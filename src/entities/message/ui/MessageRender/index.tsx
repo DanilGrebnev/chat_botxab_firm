@@ -23,41 +23,39 @@ export const MessageRender = memo(
             })
         }, [data])
 
-        const itemContentRender = useCallback((index: number, message: any) => {
-            if (!message) return
-            if (message?.role === "assistant") {
-                const { id, created_at, content, model } = message
-
-                return (
-                    <MessageAlItem
-                        key={id}
-                        label={model?.label ?? "Assistant"}
-                        created_at={created_at}
-                        content={content}
-                        className={s.padding}
-                    />
-                )
-            } else {
-                const { content, id, created_at } = message
-
-                return (
-                    <MessageUserItem
-                        key={id}
-                        content={content}
-                        created_at={created_at}
-                        className={s.padding}
-                    />
-                )
-            }
-        }, [])
-
         return (
             <Virtuoso
                 style={{ height: "100%", flexGrow: "1" }}
                 data={data}
                 ref={virtuoso}
                 endReached={endReached}
-                itemContent={itemContentRender}
+                itemContent={(_, message: any) => {
+                    if (!message) return
+                    if (message?.role === "assistant") {
+                        const { id, created_at, content, model } = message
+
+                        return (
+                            <MessageAlItem
+                                key={id}
+                                label={model?.label ?? "Assistant"}
+                                created_at={created_at}
+                                content={content}
+                                className={s.padding}
+                            />
+                        )
+                    } else {
+                        const { content, id, created_at } = message
+
+                        return (
+                            <MessageUserItem
+                                key={id}
+                                content={content}
+                                created_at={created_at}
+                                className={s.padding}
+                            />
+                        )
+                    }
+                }}
             />
         )
     }
