@@ -2,12 +2,8 @@ import type { Metadata } from "next"
 import "@/shared/styles/reset.css"
 import "@/shared/styles/variables.css"
 import "@/shared/styles/global.css"
-import localFont from "next/font/local"
 import { MainProvider } from "@/shared/providers/MainProvider"
-
-const IBMFont = localFont({
-    src: "../shared/fonts/IBMPlexSans.ttf",
-})
+import { IBMFont } from "@/shared/fonts/IBMPlexSans"
 
 export const metadata: Metadata = {
     title: "Test chat",

@@ -2,25 +2,34 @@ import { Virtuoso, type VirtuosoHandle } from "react-virtuoso"
 import { MessageAlItem } from "../MessageAlItem"
 import { MessageUserItem } from "../MessageUserItem"
 import s from "./message-render.module.css"
-import { memo, useCallback, useEffect, useRef } from "react"
+import { memo, useEffect, useRef } from "react"
+import { TAssistantMessage, TUserMessage } from "@/shared/types/message/message"
 
-interface MessageRenderProps<TData extends any[]> {
+type TMessage = (TUserMessage | TAssistantMessage)[]
+
+interface MessageRenderProps<TData extends TMessage> {
     data: TData
     endReached?: () => void
     loading?: boolean
 }
 
 export const MessageRender = memo(
-    <TData extends any[]>(props: MessageRenderProps<TData>) => {
+    <TData extends TMessage>(props: MessageRenderProps<TData>) => {
         const { data, endReached } = props
         const virtuoso = useRef<VirtuosoHandle>(null)
 
         useEffect(() => {
             if (!virtuoso.current) return
-            virtuoso.current?.scrollToIndex({
-                index: data.length - 1,
-                align: "end",
-            })
+            const id = setTimeout(() => {
+                virtuoso.current?.scrollToIndex({
+                    index: data.length - 1,
+                    align: "end",
+                })
+            }, 100)
+
+            return () => {
+                clearTimeout(id)
+            }
         }, [data])
 
         return (
@@ -29,15 +38,16 @@ export const MessageRender = memo(
                 data={data}
                 ref={virtuoso}
                 endReached={endReached}
-                itemContent={(_, message: any) => {
+                itemContent={(_, message) => {
                     if (!message) return
                     if (message?.role === "assistant") {
-                        const { id, created_at, content, model } = message
+                        const { id, created_at, model_id, content, model } =
+                            message
 
                         return (
                             <MessageAlItem
                                 key={id}
-                                label={model?.label ?? "Assistant"}
+                                label={model_id ?? "Assistant"}
                                 created_at={created_at}
                                 content={content}
                                 className={s.padding}

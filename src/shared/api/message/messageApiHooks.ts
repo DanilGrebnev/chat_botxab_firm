@@ -1,7 +1,6 @@
 import { messageApi } from "./messageApi"
 import { useInfiniteQuery, useMutation, useQuery } from "@tanstack/react-query"
-import { messageKeys } from "./messageKey"
-import { chatApi } from "../chat/chatApi"
+import { messageApiKeys } from "./messageApiKeys"
 import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { fetchEventSource } from "@microsoft/fetch-event-source"
 import { consts } from "@/shared/consts"
@@ -9,7 +8,7 @@ import { TAssistantMessage, TUserMessage } from "@/shared/types/message/message"
 
 export const useGetMessageListQuery = (chatId: string) => {
     return useInfiniteQuery({
-        queryKey: [messageKeys.getMessageList(chatId)],
+        queryKey: [messageApiKeys.getMessageList(chatId)],
 
         queryFn: ({ pageParam }) => {
             if (!pageParam.chatId) return
@@ -34,7 +33,7 @@ export const useGetAllMessageList = (chatId: string) => {
     return useQuery({
         queryFn: () => messageApi.getAllMessageList({ chatId }),
         select: (data) => data.reverse(),
-        queryKey: [messageKeys.getAllMessageList(chatId)],
+        queryKey: [messageApiKeys.getAllMessageList(chatId)],
         enabled: !!chatId,
     })
 }

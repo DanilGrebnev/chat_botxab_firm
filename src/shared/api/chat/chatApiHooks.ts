@@ -4,12 +4,12 @@ import {
     useQueryClient,
 } from "@tanstack/react-query"
 import { chatApi } from "./chatApi"
-import { chatKeys } from "./chatKeys"
+import { chatApiKeys } from "./chatApiKeys"
 
 export const useGetChatListQuery = () => {
     return useInfiniteQuery({
         queryFn: ({ pageParam }) => chatApi.getChatList(pageParam),
-        queryKey: [chatKeys.getChatList],
+        queryKey: [chatApiKeys.getChatList],
         getNextPageParam: (lastPage, __, lastPageParam) => {
             if (!lastPage.data.length) return
             return { ...lastPageParam, page: lastPageParam.page + 1 }
@@ -29,7 +29,9 @@ export const useCreateChatMutation = () => {
     return useMutation({
         mutationFn: chatApi.createChat,
         onSuccess: async () => {
-            await client.invalidateQueries({ queryKey: [chatKeys.getChatList] })
+            await client.invalidateQueries({
+                queryKey: [chatApiKeys.getChatList],
+            })
         },
     })
 }
@@ -40,7 +42,9 @@ export const useDeleteChatMutation = () => {
     return useMutation({
         mutationFn: chatApi.deleteChat,
         onSuccess: async () => {
-            await client.invalidateQueries({ queryKey: [chatKeys.getChatList] })
+            await client.invalidateQueries({
+                queryKey: [chatApiKeys.getChatList],
+            })
         },
     })
 }

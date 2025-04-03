@@ -3,7 +3,7 @@
 import cn from "@/shared/lib/cn"
 import { Container } from "@/shared/ui/Container"
 import { MessageRender } from "../MessageRender"
-import { useEffect } from "react"
+import { useDeferredValue, useEffect } from "react"
 import {
     useGetAllMessageList,
     useGetAllMessageStream,
@@ -24,6 +24,8 @@ export const MessageList = (props: MessageListProps) => {
 
     const [messages, setMessages] = useGetAllMessageStream(chatId)
 
+    const defV = useDeferredValue(messages)
+
     // Инициализируем историю сообщений
     useEffect(() => {
         if (isPending || !data?.length) return
@@ -35,7 +37,7 @@ export const MessageList = (props: MessageListProps) => {
             size='m'
             className={cn(className)}
         >
-            {!!messages?.length && <MessageRender data={messages} />}
+            {!!defV?.length && <MessageRender data={defV} />}
         </Container>
     )
 }

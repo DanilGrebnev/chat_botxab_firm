@@ -8,6 +8,7 @@ export interface TMessageBase {
     disabled: boolean
     content: string
     model: null | TAssistantModel
+    model_id: null | string
     created_at: string
 }
 
@@ -53,11 +54,13 @@ interface TAssistantModel {
 export interface TAssistantMessage extends TMessageBase {
     model: TAssistantModel
     role: "assistant"
+    model_id: string
 }
 
 export interface TUserMessage extends TMessageBase {
     role: "user"
     model: null
+    model_id: null
 }
 
 export interface TGetMessageListResponse {

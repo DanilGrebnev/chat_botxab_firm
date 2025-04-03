@@ -3,10 +3,7 @@
 import { Button } from "@/shared/ui/Button"
 import { Input } from "@/shared/ui/Input"
 import SendIcon from "@/shared/assets/send-icon.svg"
-import {
-    useGetAllMessageList,
-    useSendMessageMutation,
-} from "@/shared/api/message/messageApiHooks"
+import { useSendMessageMutation } from "@/shared/api/message/messageApiHooks"
 import { useOpenedChatSlice } from "@/shared/store/chat"
 import { ChangeEvent, useCallback, useState } from "react"
 
@@ -36,10 +33,13 @@ export const SendMessage = () => {
             }}
         >
             <Input
+                type='text'
                 placeholder='Спроси о чем-нибудь...'
                 onChange={onChange}
                 sizes='l'
                 value={message}
+                min={1}
+                required={true}
                 button={
                     <Button
                         background='variant-2'

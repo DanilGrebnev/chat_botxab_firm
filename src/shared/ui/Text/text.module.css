@@ -17,3 +17,12 @@
 .color-secondary {
     color: var(--font-color-secondary);
 }
+
+.markdown {
+    background: transparent !important;
+}
+
+.markdown * {
+    color: inherit;
+    font-family: inherit;
+}

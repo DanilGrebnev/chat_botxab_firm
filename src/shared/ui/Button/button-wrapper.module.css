@@ -5,6 +5,11 @@
     justify-content: center;
     border-radius: var(--rounded-1);
     cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn:active {
+    scale: 0.9;
 }
 
 .variant-outlined {

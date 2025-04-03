@@ -25,7 +25,12 @@ export const MessageAlItem = memo((props: MessageAlItemProps) => {
             </header>
             <section className={s.message_content}>
                 <GPTIcon className={s.al_icon} />
-                <Text fontSize='160'>{content}</Text>
+                <Text
+                    fontSize='160'
+                    markDown={true}
+                >
+                    {content}
+                </Text>
                 <footer className={s.footer}>
                     <div className={s.copy}>
                         <Text

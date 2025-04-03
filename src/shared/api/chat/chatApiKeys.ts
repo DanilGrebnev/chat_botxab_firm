@@ -1,3 +1,3 @@
-export const chatKeys = {
+export const chatApiKeys = {
     getChatList: "chat-list",
 }
