@@ -18,6 +18,7 @@ export interface SelectProps<T extends TData> {
      */
     children?: (value: T[number], i?: number) => ReactNode
     onChange: (updatedArray: T) => void
+    wrapperClassName?: string
     name?: string
     dropDownDireaction?: "top" | "bottom"
 }

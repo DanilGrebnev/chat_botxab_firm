@@ -1,0 +1,17 @@
+.wrapper {
+    border: 1px solid var(--palette-4);
+    border-radius: var(--rounded-1);
+    padding: 10px 16px;
+    margin-bottom: 14px;
+}
+
+.list {
+    display: flex;
+    gap: 8px;
+    padding: 10px;
+}
+
+.active {
+    background-color: var(--palette-9);
+    border-radius: var(--rounded-1);
+}

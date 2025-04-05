@@ -32,7 +32,12 @@ export const useGetMessageListQuery = (chatId: string) => {
 export const useGetAllMessageList = (chatId: string) => {
     return useQuery({
         queryFn: () => messageApi.getAllMessageList({ chatId }),
-        select: (data) => data.reverse(),
+        select: (data) =>
+            data.sort(
+                (a, b) =>
+                    new Date(a.created_at).getTime() -
+                    new Date(b.created_at).getTime()
+            ),
         queryKey: [messageApiKeys.getAllMessageList(chatId)],
         enabled: !!chatId,
     })

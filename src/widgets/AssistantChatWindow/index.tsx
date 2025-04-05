@@ -7,7 +7,7 @@ import { Container } from "@/shared/ui/Container"
 import s from "./assistant-chat-window.module.css"
 import { useOpenedChatSlice } from "@/shared/store/chat"
 import { memo, useEffect } from "react"
-import { useGetModelListQuery } from "@/shared/api/model/modelApiHooks"
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery"
 
 interface AssistantChatWindowProps {
     chatId: string
@@ -16,11 +16,7 @@ interface AssistantChatWindowProps {
 export const AssistantChatWindow = memo(
     ({ chatId }: AssistantChatWindowProps) => {
         const setChatId = useOpenedChatSlice.use.setChatId()
-        const { data } = useGetModelListQuery()
-
-        useEffect(() => {
-            console.log(data)
-        }, [data])
+        const matches = useMediaQuery("(max-width: 767px)")
 
         useEffect(() => {
             setChatId(chatId)
@@ -28,7 +24,7 @@ export const AssistantChatWindow = memo(
 
         return (
             <Box
-                rounded='3'
+                rounded={matches ? "0" : "3"}
                 className={s.chat_bar}
             >
                 <Container

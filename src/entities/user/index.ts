@@ -1,1 +1,2 @@
-export { UserCard } from "./ui/UserCard"
+import UserCard from "./ui/UserCard";
+export { UserCard };

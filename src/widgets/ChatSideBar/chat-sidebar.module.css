@@ -19,3 +19,43 @@
 .write_chat_name {
     margin-bottom: 16px;
 }
+@media (max-width: 767px) {
+    .sidebar {
+        max-width: 100%;
+        position: absolute;
+        left: 0;
+        top: -98%;
+        height: 100%;
+        z-index: 1000;
+        transition: top 0.3s ease;
+    }
+    .show {
+        top: 0;
+    }
+}
+
+.showbtn {
+    transform: rotate(180deg);
+    transition: transform 0.3s ease;
+}
+.rotated {
+    transform: rotate(0deg);
+}
+.btn_wrap {
+    opacity: 0.7;
+    text-align: center;
+    width: 100px;
+    border-radius: var(--rounded-1);
+    background-color: var(--palette-11);
+    position: absolute;
+    bottom: 0;
+    align-self: center;
+    justify-self: center;
+    transition: background-color 0.15s ease;
+    &:active {
+        background-color: var(--palette-8);
+    }
+}
+.btn_open {
+    bottom: 98%;
+}

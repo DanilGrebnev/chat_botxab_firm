@@ -2,6 +2,10 @@
     padding: var(--global-gap-1);
 }
 
+.rounded-0 {
+    border-radius: 0;
+}
+
 .rounded-1 {
     border-radius: var(--rounded-1);
 }
@@ -45,4 +49,7 @@
 
 .background-opacity {
     background: var(--dark-theme-2-opacity);
+}
+.background-trasparent {
+    background: transparent;
 }

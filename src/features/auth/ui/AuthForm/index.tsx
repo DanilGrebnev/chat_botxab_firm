@@ -8,24 +8,21 @@ import s from "./s.module.css"
 import { Text } from "@/shared/ui/Text"
 import { Button } from "@/shared/ui/Button"
 import { saveUserLogin } from "@/shared/api/user/loginApi"
-
-type FormDTO = {
-    email: string
-    password: string
-}
+import { FormDTO } from "@/shared/api/user/loginApi"
+import { useRouter } from "next/navigation"
 
 export const AuthForm = () => {
+    const router = useRouter()
+
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
         const formData = new FormData(e.currentTarget)
-        const data: Partial<FormDTO> = {}
-        formData.forEach(
-            (value, key) => (data[key as keyof FormDTO] = value as string)
-        )
+        const data = Object.fromEntries(formData.entries()) as FormDTO
 
-        saveUserLogin(data as Required<FormDTO>)
-        
+        saveUserLogin(data)
+
+        router.push('/')
     }
 
     return (

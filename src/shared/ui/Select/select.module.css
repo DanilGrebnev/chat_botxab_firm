@@ -27,6 +27,7 @@
 .drop_down_direction-top .select_list {
     margin-bottom: 8px;
     bottom: 100%;
+    left: 0;
 }
 
 .drop_down_direction-bottom .select_list {

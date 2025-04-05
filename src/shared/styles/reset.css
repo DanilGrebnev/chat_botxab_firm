@@ -16,14 +16,7 @@ ul {
     list-style: none;
 }
 
-img,
-svg,
-video,
-canvas,
-picture {
-    display: block;
-    max-width: 100%;
-}
+
 
 input,
 button,

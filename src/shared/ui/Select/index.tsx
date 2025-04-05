@@ -14,6 +14,7 @@ import type { SelectProps, TData } from "./types"
 
 export const Select = <T extends TData>(props: SelectProps<T>) => {
     const {
+        wrapperClassName,
         label,
         data,
         name,
@@ -29,7 +30,7 @@ export const Select = <T extends TData>(props: SelectProps<T>) => {
             setIsOpen(false)
         },
     })
-
+    
     const onOpen = () => {
         setIsOpen((p) => !p)
     }
@@ -72,7 +73,7 @@ export const Select = <T extends TData>(props: SelectProps<T>) => {
             ref={nodeRef}
             className={cn(
                 s.select,
-                s[`drop_down_direction-${dropDownDireaction}`]
+                s[`drop_down_direction-${dropDownDireaction}`], wrapperClassName
             )}
             onClick={onOpen}
         >

@@ -9,7 +9,8 @@
     grid-row: 1/3;
 }
 
-.out_icon {
+
+.out_btn {
     grid-column: 3/4;
     grid-row: 1/3;
     align-self: center;
