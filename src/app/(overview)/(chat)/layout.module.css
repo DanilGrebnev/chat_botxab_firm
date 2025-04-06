@@ -1,10 +1,12 @@
 .page {
-    height: 100vh;
+    height: 100dvh;
     display: flex;
     gap: var(--global-gap-1);
     padding: var(--global-gap-1);
 }
 
-.mobile_page {
-    padding: var(--global-gap-1) 0 0 0;
+@media (max-width: 767px) {
+    .page {
+        padding: 0;
+    }
 }

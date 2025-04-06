@@ -18,7 +18,7 @@ export const useGetChatListQuery = () => {
             if (lastPageParam.page === 1) return
             return { ...lastPageParam, page: lastPageParam.page - 1 }
         },
-        select: (data) => data.pages.flatMap((page) => page.data).sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime()),
+        select: (data) => data.pages.flatMap((page) => page.data).sort((a, b) => new Date(b.created_at).getTime() - new Date(a.created_at).getTime()),
         initialPageParam: { page: 1 },
     })
 }

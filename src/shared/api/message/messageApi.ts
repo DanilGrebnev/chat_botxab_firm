@@ -23,7 +23,7 @@ class MessageApi {
     }
 
     sendMessage = (message: TCreateMessageDTO) => {
-        return api.post(this.baseUrl + "send", { json: message }).json()
+        return api.post(this.baseUrl + "send", { json: message}).json()
     }
 }
 

@@ -13,13 +13,29 @@
 
 .message_content {
     display: grid;
-    width: fit-content;
+    max-width: 1250px; 
+    width: 100%;      
     grid-template-columns: repeat(2, auto);
     grid-template-rows: auto auto;
     justify-items: start;
     row-gap: 8px;
     column-gap: 16px;
+
+    & *  {
+        overflow: hidden;
+        max-width: 100%;
+        overflow-wrap: break-word; 
+        word-break: break-word;    
+        box-sizing: border-box;
+        & * {
+            max-width: 100%;
+        overflow-wrap: break-word; 
+        word-break: break-word;    
+        box-sizing: border-box;
+        }  
+    }
 }
+
 
 .header {
     display: flex;

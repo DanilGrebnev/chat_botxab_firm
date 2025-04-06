@@ -5,6 +5,8 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react"
 import { fetchEventSource } from "@microsoft/fetch-event-source"
 import { consts } from "@/shared/consts"
 import { TAssistantMessage, TUserMessage } from "@/shared/types/message/message"
+import { headers } from "next/headers"
+import { useSendMessageBlocker } from "@/shared/store/message"
 
 export const useGetMessageListQuery = (chatId: string) => {
     return useInfiniteQuery({
@@ -50,6 +52,8 @@ export const useSendMessageMutation = () => {
 }
 
 export const useGetAllMessageStream = (chatId: string) => {
+    const { setIsBlocking } = useSendMessageBlocker()
+
     interface TSmallMessage {
         content: string
         id: string
@@ -73,14 +77,17 @@ export const useGetAllMessageStream = (chatId: string) => {
 
     useEffect(() => {
         if (!chatId) return
-        const controller = new AbortController()
-
-        fetchEventSource(consts.BASE_FETCH_URL + `/chat/${chatId}/stream`, {
+        const url = consts.BASE_FETCH_URL + `/chat/${chatId}/stream`
+        const options = {
             method: "GET",
             headers: {
-                [consts.API_AUTH_HEADER as string]:
-                    consts.AUTH_API_TOKEN as string,
+                [consts.API_AUTH_HEADER]: consts.AUTH_API_TOKEN,
             },
+        }
+        const controller = new AbortController()
+
+        fetchEventSource(url, {
+            ...options,
 
             onmessage(messageEvent) {
                 const eventData = JSON.parse(
@@ -111,12 +118,15 @@ export const useGetAllMessageStream = (chatId: string) => {
                         })
                     )
                 }
+                if (eventData.name === "JOB_DONE") {
+                    setIsBlocking(false)
+                }
             },
             signal: controller.signal,
         })
 
         return () => controller.abort()
-    }, [chatId])
+    }, [chatId, setIsBlocking])
 
     return [messages, setMessages] as [
         TMessageStore,

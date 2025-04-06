@@ -1,6 +1,6 @@
 body {
     background: var(--palette-1);
-    height: 100vh;
+    height: 100dvh;
 }
 
 *::-webkit-scrollbar {

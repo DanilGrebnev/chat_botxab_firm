@@ -1,22 +1,32 @@
 "use client"
-import { useLayoutEffect, useState } from "react"
-import { useRouter } from "next/navigation"
-import { getUserLogin } from "@/shared/api/user/loginApi"
+import { useLayoutEffect } from "react"
+import { usePathname, useRouter } from "next/navigation"
+import { useCheckAuth } from "@/shared/api/user/loginApiHooks"
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [checked, setChecked] = useState(false)
     const router = useRouter()
+    const pathname = usePathname()
+    const isLoginPage = pathname === "/login"
+    const { isAuth, isLoading } = useCheckAuth()
 
     useLayoutEffect(() => {
-        const isAuthenticated = getUserLogin()
-        if (!isAuthenticated) {
-            router.replace("/login")
-        } else {
-            setChecked(true)
+        if (isLoading) {
+            return
         }
-    }, [router])
+        if (isAuth) {
+            router.replace("/")
+        } else {
+            router.replace("/login")
+        }
+    }, [isAuth, router, isLoading])
 
-    if (!checked) return null
+    if (isLoading) return null
+    if (isLoginPage && isAuth) {
+        return null
+    }
+    if (!isLoginPage && !isAuth) {
+        return null
+    }
 
     return <>{children}</>
 }

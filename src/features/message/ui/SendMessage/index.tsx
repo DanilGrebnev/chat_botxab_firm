@@ -7,13 +7,15 @@ import { useSendMessageMutation } from "@/shared/api/message/messageApiHooks"
 import { useOpenedChatSlice } from "@/shared/store/chat"
 import { ChangeEvent, useCallback, useState } from "react"
 import { SelectAlModel } from "@/shared/ui/SelectAlModel"
+import { useSendMessageBlocker } from "@/shared/store/message"
 
 export const SendMessage = () => {
     const chatId = useOpenedChatSlice.use.openedChatId()
 
     const [message, setMessage] = useState("")
+    const { isBlocking, setIsBlocking } = useSendMessageBlocker()
 
-    const { mutate } = useSendMessageMutation()
+    const { mutate, isPending } = useSendMessageMutation()
 
     const onChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         setMessage(e.target.value)
@@ -21,10 +23,12 @@ export const SendMessage = () => {
 
     return (
         <>
-        <SelectAlModel />
+            <SelectAlModel />
             <form
                 onSubmit={(e) => {
                     e.preventDefault()
+                    if (isBlocking || isPending) return
+                    setIsBlocking(true)
                     mutate(
                         { chatId, message },
                         {

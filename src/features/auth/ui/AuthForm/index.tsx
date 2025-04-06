@@ -7,12 +7,11 @@ import CloseIcon from "@/shared/assets/close.svg"
 import s from "./s.module.css"
 import { Text } from "@/shared/ui/Text"
 import { Button } from "@/shared/ui/Button"
-import { saveUserLogin } from "@/shared/api/user/loginApi"
 import { FormDTO } from "@/shared/api/user/loginApi"
-import { useRouter } from "next/navigation"
+import { useUserLoginMutation } from "@/shared/api/user/loginApiHooks"
 
 export const AuthForm = () => {
-    const router = useRouter()
+    const { mutate } = useUserLoginMutation()
 
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -20,9 +19,8 @@ export const AuthForm = () => {
         const formData = new FormData(e.currentTarget)
         const data = Object.fromEntries(formData.entries()) as FormDTO
 
-        saveUserLogin(data)
+        mutate(data)
 
-        router.push('/')
     }
 
     return (

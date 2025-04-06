@@ -1,3 +1,4 @@
+import { data } from "motion/react-m"
 import { AUTH_CREDENTIALS_STORAGE_KEY } from "./constants"
 
 export type FormDTO = {
@@ -51,5 +52,27 @@ export const getUserLogin = () => {
 }
 
 export const deleteUserLogin = () => {
+    localStorage.removeItem(AUTH_CREDENTIALS_STORAGE_KEY)
+}
+
+export const saveAuth = (data: FormDTO) => {
+    localStorage.setItem(AUTH_CREDENTIALS_STORAGE_KEY, JSON.stringify(data))
+}
+
+export const getAuth = () => {
+    const storedLogin = localStorage.getItem(AUTH_CREDENTIALS_STORAGE_KEY)
+    if (storedLogin) {
+        const { hasError, error, parsed } =
+            safeJsonParse(isFormDTO)(storedLogin)
+        if (hasError) {
+            throw new Error("parsing error", { cause: error })
+        } else {
+            return parsed
+        }
+    }
+    return null
+}
+
+export const deleteAuth = () => {
     localStorage.removeItem(AUTH_CREDENTIALS_STORAGE_KEY)
 }

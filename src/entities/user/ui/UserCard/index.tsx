@@ -5,9 +5,13 @@ import { UserProfileIcon } from "@/shared/ui/UserProfileIcon"
 import OutIcon from "@/shared/assets/out-icon.svg"
 import { Text } from "@/shared/ui/Text"
 import s from "./user-card.module.css"
-import { deleteUserLogin, getUserLogin } from "@/shared/api/user/loginApi"
+import { deleteUserLogin } from "@/shared/api/user/loginApi"
 import { CircleButton } from "@/shared/ui/CircleButton"
 import { useRouter } from "next/navigation"
+import {
+    useGetUserProfile,
+    useUserLogoutMutation,
+} from "@/shared/api/user/loginApiHooks"
 
 interface UserCardProps {
     className?: string
@@ -16,12 +20,13 @@ interface UserCardProps {
 const UserCard = (props: UserCardProps) => {
     const { className } = props
     const router = useRouter()
-    const { email } = getUserLogin() || {}
+    const { data } = useGetUserProfile()
+    const { mutate } = useUserLogoutMutation()
+    const email = data?.email ?? undefined
     const nickname = email?.substring(0, email.indexOf("@"))
 
     const onCLick = () => {
-        deleteUserLogin()
-        router.push("/login")
+        mutate()
     }
 
     return (
