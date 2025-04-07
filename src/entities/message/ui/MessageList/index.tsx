@@ -17,9 +17,6 @@ interface MessageListProps {
 export const MessageList = (props: MessageListProps) => {
     const { className, chatId } = props
 
-    // Если раскомментировать, то будет ошибка с вечным перерендером от virtuoso.
-    // const chatId = useOpenedChatSlice.use.openedChatId()
-
     const { data, isPending } = useGetAllMessageList(chatId)
 
     const [messages, setMessages] = useGetAllMessageStream(chatId)
