@@ -7,6 +7,7 @@ import { useGetChatListQuery } from "@/shared/api/chat/chatApiHooks"
 import { useOpenedChatSlice } from "@/shared/store/chat"
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { useIntersectionObserver } from "@/shared/hooks/useIntersectionObserver"
 
 interface ChatListRenderProps {
     className?: string
@@ -15,8 +16,17 @@ interface ChatListRenderProps {
 export const ChatList = (props: ChatListRenderProps) => {
     const { className } = props
     const router = useRouter()
-    const { data } = useGetChatListQuery()
+    const { data, fetchNextPage, hasNextPage } = useGetChatListQuery()
     const chatId = useOpenedChatSlice.use.openedChatId()
+    const cursorRef = useIntersectionObserver(() => {
+        try {
+            if (hasNextPage) {
+                fetchNextPage()
+            }
+        } catch (error) {
+            console.error("Error fetching next page:", error)
+        }
+    })
 
     useEffect(() => {
         if (data) {
@@ -38,6 +48,7 @@ export const ChatList = (props: ChatListRenderProps) => {
                     )
                 })}
             </div>
+            <div ref={cursorRef}/>
         </div>
     )
 }

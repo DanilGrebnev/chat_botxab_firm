@@ -1,6 +1,7 @@
 body {
     background: var(--palette-1);
     height: 100dvh;
+    scroll-behavior: smooth;
 }
 
 *::-webkit-scrollbar {

@@ -33,7 +33,8 @@ export const MessageRender = memo(
         }, [data])
 
         return (
-            <Virtuoso
+            <Virtuoso   
+                increaseViewportBy={800}
                 style={{ height: "100%", flexGrow: "1" }}
                 data={data}
                 ref={virtuoso}

@@ -2,6 +2,7 @@
     display: grid;
     gap: 10px;
     grid-template-columns: auto 1fr auto;
+    max-width: 60%;
     width: fit-content;
     justify-self: end;
 }
@@ -10,11 +11,19 @@
     display: flex;
     background: var(--palette-10);
     border-radius: 10px 10px 0 10px;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .text {
     margin: 7px 8px;
     padding: 7px 8px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width: 100%;
+    min-width: 0;
+
 }
 
 .time {
@@ -25,4 +34,23 @@
 
 .copy_icon {
     align-self: end;
+}
+
+@media (max-width: 767px) {
+    .message {
+        max-width: 85%;
+        gap: 6px;
+    }
+
+    .content {
+        border-radius: 8px 8px 0 8px; 
+    }
+
+    .text {
+        margin: 5px 6px;
+        padding: 5px 6px;
+        font-size: 14px; 
+        line-height: 1.4;
+        hyphens: auto;
+    }
 }
