@@ -4,6 +4,7 @@
     grid-template-columns: auto 1fr auto;
     max-width: 60%;
     width: fit-content;
+    margin-left: auto;
     justify-self: end;
 }
 
